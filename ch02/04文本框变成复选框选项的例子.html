@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 example</title>
+</head>
+<body>
+    
+    <div id="app">
+        <input type="text" v-model="title" @keyup.enter.native="addTodo">
+        <button v-if="active<all" @click="clear">清理</button>
+        <ul>
+            <li v-for="todo in todos">
+                <!-- <input type="checkbox" checked="unchecked"> -->
+                <input type="checkbox" v-model="todo.done">
+                <!-- 根据todo.done来决定是否有done这个class -->
+                <span :class="{done:todo.done}">{{todo.title}}</span>
+            </li>
+        </ul>
+        <div v-if="all > 0">
+            全选<input type="checkbox" v-model="allDone">
+            <p>未完成 {{active}} / 共计 {{all}}</p>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <script>
+        const App = {
+            data() {
+                return {
+                    title: "我的Vue3",
+                    todos: [
+                        {title: '吃饭', done:false},
+                        {title: '睡觉', done:true} // 默认选中
+                    ]
+                }
+            },
+            
+            methods: {
+                addTodo() { // 将文本框内容变成复选框条目（默认不选中）
+                    if (this.title.trim >= 1) { // 可以使用正则
+                        this.todos.push(
+                        {title: this.title, done:false},
+                        ),
+                        this.title = ""
+                    }
+                },
+                clear() {
+                    this.todos = this.todos.filter(v => !v.done)
+                }
+            },
+
+            computed: {
+                active() {
+                    return this.todos.filter(v => !v.done).length
+                },
+                all() {
+                    return this.todos.length
+                },
+                allDone: {
+                    get: function() {
+                        return this.active === 0
+                    },
+                    set: function(val) {
+                        return this.todos.forEach(todo => todo.done = val)
+                    }
+                }
+            }
+        }
+
+    // 启动应用
+    Vue.createApp(App).mount('#app')    
+    </script>
+
+    <style>
+        .done {
+            color: gray;
+            text-decoration: line-through;
+        }
+    </style>
+
+</body>
+</html>
