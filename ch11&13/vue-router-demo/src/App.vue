@@ -4,7 +4,8 @@
 <template>
   <div id="app">
     <router-link to="/">home</router-link> | 
-    <router-link to="/about">about</router-link>
+    <router-link to="/about">about</router-link> | 
+    <router-link to="/todo">todo</router-link>
   </div>
 
 <router-view></router-view>

@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory } from "./grouter/index";
 
 import Home from '../pages/home.vue'
 import About from '../pages/about.vue'
+import Todo from '../pages/todo.vue'
 
 const routes = [
     {
@@ -14,6 +15,11 @@ const routes = [
         path: '/about',
         name: 'About',
         component: About
+    },
+    {
+        path: '/todo',
+        name: 'Todo',
+        component: Todo
     }
 ]
 
