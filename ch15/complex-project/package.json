@@ -1,0 +1,24 @@
+{
+  "name": "complex-project",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "element3": "^0.0.40",
+    "jsonwebtoken": "^8.5.1",
+    "mockjs": "^1.1.0",
+    "vue": "^3.2.16"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.9.3",
+    "@vitejs/plugin-vue-jsx": "^1.3.3",
+    "vite": "^2.6.4",
+    "vite-plugin-mock": "^2.9.6",
+    "vue-router": "^4.0.12",
+    "vuex": "^4.0.2"
+  }
+}
