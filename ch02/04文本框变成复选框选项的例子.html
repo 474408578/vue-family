@@ -40,7 +40,7 @@
             
             methods: {
                 addTodo() { // 将文本框内容变成复选框条目（默认不选中）
-                    if (this.title.trim >= 1) { // 可以使用正则
+                    if (this.title.trim().length >= 1) { // 可以使用正则
                         this.todos.push(
                         {title: this.title, done:false},
                         ),
