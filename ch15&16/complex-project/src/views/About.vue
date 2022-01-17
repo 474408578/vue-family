@@ -16,13 +16,20 @@ const name = ref("")
 
 async function validToken() {
     try {
-        const {code, data} = getInfo()
-        router.replace('/login')
-        console.log(code,data)
-        if (code === 401) {
-            router.push('/login')
-        }
-        name.value = data
+        getInfo().then(res => {
+            if (res.code === 401) {
+                // 移除token数据
+                localStorage.removeItem("token")
+                // 跳转到登录页
+                router.push('/login')
+            }
+            else if (res.code === 200){
+                name.value = res.data
+            } else {
+                console(res) // for debug
+            }
+        }).catch(err => console.log(err))
+        
     } catch {
         router.push('/login')
     }

@@ -8,7 +8,7 @@ export const login = (body) => request.post('/api/login', body).then(res => {
 
 export const getInfo = () => request.get('/api/get').then(res => {
     return res
-}).catch(() => {
-    
+}).catch((e) => {
+    return e;
 })
 

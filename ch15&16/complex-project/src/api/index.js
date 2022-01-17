@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { getToken } from '../utils/auth'
 import { Message } from 'element3'
-import router from '../router'
 
 const service = axios.create({
     baseURL: '/',
@@ -26,21 +25,14 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
     response => {
-        const res = response.data
         // Invalid token
+        const res = response.data
         if (res.code === 401) {
             Message({
                 message: "登录失效，请重新登录",
                 type: 'warning'
             })
-            console.log(res)
-            return router.push('/login')
-            // return Promise.reject(new Error(res.data) || "Error")
-        }
-
-        if (res.code !== 200) {
-            console.log("接口信息报错", res.message)
-            return Promise.reject(new Error(res.message || "warning"))
+            return res
         } else {
             return res
         }

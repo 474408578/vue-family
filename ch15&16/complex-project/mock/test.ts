@@ -34,9 +34,11 @@ export default [
     response: (req, res) => {
       const body = req.body;
       if (body.name !== 'admin' || body.password !== '123456') {
-        return { code: 60204, message: 'Username or password are incorrect.' };
+        return { code: 403, message: 'Username or password are incorrect.' };
       }
 
+      // 生产jwt，60s后过期，分布式中，可以将这个token存入redis内，校验时从redis中获取，
+      // 如key为：user-token
       const token = sign({ user: body.name }, secret, {
         expiresIn: 60
       });
